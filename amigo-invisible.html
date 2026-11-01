@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amigo Invisible</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf9f5;--card:#fff;--tier:#f4f1ea;--pine:#14382b;--pine-d:#0f2d22;--wine:#8b1e2d;--gold:#d4af37;--text:#1f2927;--muted:#5c6a65;--line:rgba(31,41,39,.12);--on-pine:#fbf9f5;--sh:0 4px 20px -2px rgba(20,56,43,.07),0 2px 6px -1px rgba(20,56,43,.04);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a16;--card:#17261f;--tier:#1f3129;--pine:#a8cfbd;--pine-d:#c4ebd8;--wine:#c9475a;--text:#e8f3f0;--muted:#9bb0a8;--line:rgba(232,243,240,.14);--on-pine:#0f2d22;--sh:0 4px 20px -2px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#0f1a16;--card:#17261f;--tier:#1f3129;--pine:#a8cfbd;--pine-d:#c4ebd8;--wine:#c9475a;--text:#e8f3f0;--muted:#9bb0a8;--line:rgba(232,243,240,.14);--on-pine:#0f2d22}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/22px 'Plus Jakarta Sans',system-ui,sans-serif}
+main{max-width:520px;margin:0 auto;padding:20px 16px 48px}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;margin:0;letter-spacing:-.01em}
+h1{font-size:28px;line-height:36px;font-weight:600}h2{font-size:22px;line-height:30px;font-weight:500}h3{font-size:17px;font-weight:600}
+.brand{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--pine);display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.brand i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.steps{display:flex;gap:6px;margin:6px 0 4px}.steps b{flex:1;height:4px;border-radius:4px;background:var(--line)}.steps b.on{background:var(--pine)}
+.lab{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin:14px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--sh);margin-top:14px}
+input{width:100%;font:inherit;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:11px 12px}
+input:focus{outline:none;border-color:var(--pine);box-shadow:0 0 0 2px rgba(212,175,55,.35)}
+.btn{font:600 14px 'Plus Jakarta Sans',sans-serif;border:1px solid transparent;border-radius:8px;padding:12px 16px;cursor:pointer;background:var(--pine);color:var(--on-pine);width:100%;text-align:center;text-decoration:none;display:block;transition:transform .1s}
+.btn:active{transform:scale(.99)}.btn.wine{background:var(--wine);color:#fff}.btn.ghost{background:transparent;color:var(--pine);border-color:var(--line)}.btn.sm{width:auto;padding:8px 12px;font-size:13px;display:inline-block}.btn[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.row>.fix{flex:none}
+.p{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.p:first-child{border-top:0}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:13px;color:#fff;flex:none}
+.p .t{flex:1;min-width:0}.p .t b{display:block;font-weight:600}.p .t span{color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.x{background:none;border:0;color:var(--muted);font-size:20px;cursor:pointer;padding:4px 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:30px;padding:0 14px;border-radius:9999px;border:1px solid var(--line);background:var(--tier);color:var(--text);font:500 13px 'Plus Jakarta Sans',sans-serif;cursor:pointer}
+.chip.on{background:var(--pine);color:var(--on-pine);border-color:var(--pine)}.chip.w.on{background:var(--wine);color:#fff;border-color:var(--wine)}
+.chip:disabled{opacity:.35;cursor:not-allowed}
+.note{font-size:13px;color:var(--muted)}.ok{color:#198754;font-weight:600}.bad{color:var(--wine);font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tile{background:var(--tier);border-radius:12px;padding:12px}.tile b{font:600 22px 'Playfair Display',serif;display:block;color:var(--pine)}.tile span{font-size:12px;color:var(--muted)}
+.env{border:1px solid var(--line);border-radius:24px;padding:6px;background:var(--card);box-shadow:0 16px 40px -8px rgba(15,45,34,.14),0 6px 16px -4px rgba(139,30,45,.08)}
+.env>div{border:1px dashed var(--gold);border-radius:19px;padding:30px 20px;text-align:center}
+.big{font:600 34px/42px 'Playfair Display',serif;color:var(--wine);margin:10px 0}
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 12px);transform:translateX(-50%);background:var(--pine);color:var(--on-pine);padding:10px 18px;border-radius:9999px;font-size:13px;font-weight:600;box-shadow:var(--sh);z-index:9;max-width:90vw}
+.nav{display:flex;gap:10px;margin-top:18px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<div id="toast" class="toast" hidden></div>
+<script>
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COLORS=['#14382b','#8b1e2d','#735c00','#426656','#721c24','#2a4d3f'];
+let S={step:0,title:'Navidad Familia y Amigos',budget:'20€ – 30€',date:'24 de diciembre',people:[],rules:{},giver:null,mutual:true,links:null,base:''};
+try{const r=localStorage.getItem('ai_state');if(r)S={...S,...JSON.parse(r)}}catch(e){}
+const save=()=>{try{localStorage.setItem('ai_state',JSON.stringify(S))}catch(e){}};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2200)};
+const ini=n=>n.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+const nm=id=>S.people.find(p=>p.id===id)?.name||'';
+const bytes2hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+const hex2bytes=h=>new Uint8Array(h.match(/../g).map(x=>parseInt(x,16)));
+
+/* ---- Sorteo ---- */
+function solve(randomize){
+  const ids=S.people.map(p=>p.id);let order=[...ids];
+  if(randomize)order.sort(()=>Math.random()-.5);
+  const ok=(a,b)=>a!==b&&!(S.rules[a]||[]).includes(b);
+  const taken=new Set(),res={};
+  const go=i=>{if(i===order.length)return true;const g=order[i];
+    let c=ids.filter(r=>!taken.has(r)&&ok(g,r));if(randomize)c.sort(()=>Math.random()-.5);
+    for(const r of c){taken.add(r);res[g]=r;if(go(i+1))return true;taken.delete(r)}return false};
+  return go(0)?res:null;
+}
+async function encrypt(obj){
+  const k=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+  const key=await crypto.subtle.importKey('raw',k,'AES-GCM',false,['encrypt']);
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(JSON.stringify(obj)));
+  return bytes2hex(k)+bytes2hex(iv)+bytes2hex(ct);
+}
+async function decrypt(h){
+  const k=hex2bytes(h.slice(0,32)),iv=hex2bytes(h.slice(32,56)),ct=hex2bytes(h.slice(56));
+  const key=await crypto.subtle.importKey('raw',k,'AES-GCM',false,['decrypt']);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct)));
+}
+
+/* ---- Vistas ---- */
+const head=n=>`<div class="brand"><i></i>Amigo Invisible</div>${n?`<div class="steps">${[1,2,3].map(i=>`<b class="${i<=n?'on':''}"></b>`).join('')}</div><div class="note">Paso ${n} de 3</div>`:''}`;
+
+function vHome(){return `${head(0)}
+<h1>Un regalo, un secreto, una sorpresa.</h1>
+<p class="note" style="margin:10px 0 20px">Organiza tu amigo invisible en minutos, sin registro. Cada participante recibe un enlace personal y solo él ve a quién le toca.</p>
+<button class="btn" data-a="go" data-v="1">Crear nuevo sorteo</button>
+${S.links?`<button class="btn ghost" style="margin-top:10px" data-a="go" data-v="3">Volver a mi sorteo realizado</button>`:''}
+<div class="card"><h3>Cómo funciona</h3><p class="note" style="margin:8px 0 0">① Añade a los participantes. ② Marca quién no puede regalar a quién. ③ Sortea y envía un enlace cifrado a cada persona. El organizador no ve los emparejamientos.</p></div>`}
+
+function vPeople(){const n=S.people.length;return `${head(1)}
+<h2 style="margin-top:14px">Configuración del grupo</h2>
+<label class="lab">Nombre del evento</label><input id="ev-t" value="${esc(S.title)}">
+<div class="row"><div><label class="lab">Presupuesto</label><input id="ev-b" value="${esc(S.budget)}"></div><div><label class="lab">Fecha de entrega</label><input id="ev-d" value="${esc(S.date)}"></div></div>
+<div class="card"><h3>Participantes</h3>
+<label class="lab">Nombre completo</label><input id="p-n" placeholder="Ana García" autocomplete="off">
+<label class="lab">Correo electrónico</label><input id="p-e" type="email" placeholder="ana@correo.com" autocomplete="off">
+<button class="btn ghost" style="margin-top:12px" data-a="add">+ Añadir participante</button></div>
+<div class="card">${n?S.people.map((p,i)=>`<div class="p"><div class="av" style="background:${COLORS[i%6]}">${esc(ini(p.name))}</div><div class="t"><b>${esc(p.name)}</b><span>${esc(p.email)}</span></div><button class="x" data-a="del" data-id="${p.id}" aria-label="Eliminar">×</button></div>`).join(''):'<span class="note">Aún no hay participantes.</span>'}
+<p class="note" style="margin:10px 0 0">${n<3?`Faltan ${3-n} para el mínimo de 3.`:`${n} participantes confirmados.`}</p></div>
+<div class="nav"><button class="btn ghost" data-a="go" data-v="0">Atrás</button><button class="btn" data-a="go" data-v="2" ${n<3?'disabled':''}>Siguiente</button></div>`}
+
+function vRules(){
+  const g=S.giver&&S.people.find(p=>p.id===S.giver)?S.giver:S.people[0].id,ex=S.rules[g]||[],viable=!!solve(false);
+  const list=Object.entries(S.rules).flatMap(([a,bs])=>bs.map(b=>[a,b]));
+  return `${head(2)}
+<h2 style="margin-top:14px">Reglas de exclusión</h2>
+<p class="note">Parejas, convivientes o quien ya se regaló el año pasado.</p>
+<div class="card"><label class="lab" style="margin-top:0">¿Quién regala?</label><div class="chips">${S.people.map(p=>`<button class="chip ${p.id===g?'on':''}" data-a="giver" data-id="${p.id}">${esc(p.name.split(' ')[0])}</button>`).join('')}</div>
+<label class="lab">No puede regalar a…</label><div class="chips">${S.people.filter(p=>p.id!==g).map(p=>`<button class="chip w ${ex.includes(p.id)?'on':''}" data-a="tog" data-g="${g}" data-id="${p.id}">${esc(p.name.split(' ')[0])}</button>`).join('')}</div>
+<label class="row" style="margin-top:14px;gap:10px;font-size:13px"><input type="checkbox" id="mut" style="width:18px;flex:none" ${S.mutual?'checked':''} data-a="mut"><span>Aplicar también a la inversa (parejas)</span></label></div>
+<div class="card"><h3>Viabilidad</h3><p style="margin:6px 0 0" class="${viable?'ok':'bad'}">${viable?'Sorteo válido: existe al menos un reparto posible.':'Con estas reglas no hay reparto posible. Elimina alguna exclusión.'}</p></div>
+<div class="card"><h3>Reglas activas</h3>${list.length?list.map(([a,b])=>`<div class="p"><div class="t"><b>${esc(nm(a))} → ${esc(nm(b))}</b><span>No puede regalar a</span></div><button class="x" data-a="unrule" data-g="${a}" data-id="${b}" aria-label="Quitar">×</button></div>`).join(''):'<span class="note">Sin reglas.</span>'}</div>
+<div class="nav"><button class="btn ghost" data-a="go" data-v="1">Atrás</button><button class="btn" data-a="go" data-v="3" ${viable?'':'disabled'}>Siguiente</button></div>`}
+
+function vLaunch(){
+  const nr=Object.values(S.rules).reduce((a,b)=>a+b.length,0);
+  if(S.links){
+    return `${head(3)}<h2 style="margin-top:14px">¡Sorteo realizado!</h2>
+<p class="note">Envía a cada persona su enlace personal. No abras los enlaces de otros: ahí está su amigo invisible.</p>
+<label class="lab">Dirección de la app (los enlaces apuntan aquí)</label><input id="base" value="${esc(S.base)}">
+<div class="card">${S.links.map((l,i)=>`<div class="p"><div class="av" style="background:${COLORS[i%6]}">${esc(ini(l.name))}</div><div class="t"><b>${esc(l.name)}</b><span>${esc(l.email)}</span></div></div><div class="row" style="padding-bottom:10px"><a class="btn sm" data-a="mail" data-i="${i}" href="#" target="_blank" rel="noopener">Email</a><a class="btn sm ghost" data-a="wa" data-i="${i}" href="#" target="_blank" rel="noopener">WhatsApp</a><button class="btn sm ghost" data-a="copy" data-i="${i}">Copiar</button></div>`).join('')}</div>
+<p class="note">Los enlaces quedan guardados en este dispositivo. Si repites el sorteo, los anteriores dejan de valer.</p>
+<button class="btn ghost" data-a="redo">Descartar y hacer otro sorteo</button>`}
+  return `${head(3)}<h2 style="margin-top:14px">Confirmación y lanzamiento</h2>
+<div class="grid" style="margin-top:14px"><div class="tile"><b>${S.people.length}</b><span>participantes</span></div><div class="tile"><b>${nr}</b><span>reglas activas</span></div><div class="tile"><b style="font-size:17px">${esc(S.budget)}</b><span>presupuesto</span></div><div class="tile"><b style="font-size:17px">${esc(S.date)}</b><span>fecha</span></div></div>
+<div class="card"><h3>Imparcialidad total</h3><p class="note" style="margin:6px 0 0">Los emparejamientos se cifran dentro de cada enlace y esta pantalla nunca los muestra, ni siquiera al organizador.</p></div>
+<div class="nav"><button class="btn ghost" data-a="go" data-v="2">Atrás</button><button class="btn wine" data-a="draw">Realizar sorteo</button></div>`}
+
+/* ---- Vista del receptor ---- */
+async function vReveal(h){
+  app.innerHTML=head(0)+'<p class="note">Abriendo tu sobre…</p>';
+  try{const d=await decrypt(h);
+    app.innerHTML=`${head(0)}<div class="env"><div id="env"><div class="note" style="text-transform:uppercase;letter-spacing:.05em;font-weight:600">${esc(d.t)}</div>
+<h2 style="margin:12px 0">Hola, ${esc(d.g)}</h2><p class="note">Tienes un amigo invisible esperándote. Asegúrate de que nadie mira tu pantalla.</p>
+<button class="btn wine" style="margin-top:18px" id="rv">Revelar a mi amigo invisible</button></div></div>`;
+    $('#rv').onclick=()=>{$('#env').innerHTML=`<div class="note" style="text-transform:uppercase;letter-spacing:.05em;font-weight:600">Tu amigo invisible es</div><div class="big">${esc(d.r)}</div><p class="note">Presupuesto: <b>${esc(d.b)}</b><br>Entrega: <b>${esc(d.d)}</b></p><p class="note" style="margin-top:14px">Es un secreto. ¡Que disfrutes eligiendo el regalo!</p>`};
+  }catch(e){app.innerHTML=head(0)+'<div class="card"><h3>Enlace no válido</h3><p class="note">Este enlace está incompleto o dañado. Pide a quien organiza que te lo reenvíe.</p></div>'}
+}
+
+/* ---- Render y acciones ---- */
+function render(){app.innerHTML=[vHome,vPeople,vRules,vLaunch][S.step]();window.scrollTo(0,0)}
+function link(i){return `${S.base}#r${S.links[i].token}`}
+function msg(i){const l=S.links[i];return `Hola ${l.name}, ¡ya está hecho el sorteo del amigo invisible “${S.title}”! Abre tu enlace personal para descubrir a quién le regalas (no se lo enseñes a nadie):\n\n${link(i)}\n\nPresupuesto: ${S.budget}. Entrega: ${S.date}.`}
+
+document.addEventListener('input',e=>{const m={'ev-t':'title','ev-b':'budget','ev-d':'date','base':'base'}[e.target.id];if(m){S[m]=e.target.value;save()}});
+document.addEventListener('click',async e=>{
+  const el=e.target.closest('[data-a]');if(!el)return;const a=el.dataset.a,id=el.dataset.id;
+  if(a==='mail'||a==='wa'){const i=+el.dataset.i;el.href=a==='mail'?`mailto:${S.links[i].email}?subject=${encodeURIComponent('Tu amigo invisible: '+S.title)}&body=${encodeURIComponent(msg(i))}`:'https://wa.me/?text='+encodeURIComponent(msg(i));return}
+  if(el.tagName==='A')e.preventDefault();
+  if(a==='go'){S.step=+el.dataset.v;if(S.step===3&&!S.base)S.base=location.href.split('#')[0]}
+  else if(a==='add'){const n=$('#p-n').value.trim(),m=$('#p-e').value.trim();
+    if(!n||!/^\S+@\S+\.\S+$/.test(m))return toast('Indica un nombre y un correo válido');
+    S.people.push({id:'p'+Date.now(),name:n,email:m});S.links=null}
+  else if(a==='del'){S.people=S.people.filter(p=>p.id!==id);delete S.rules[id];for(const k in S.rules)S.rules[k]=S.rules[k].filter(x=>x!==id);S.links=null}
+  else if(a==='giver')S.giver=id;
+  else if(a==='mut'){S.mutual=el.checked;save();return}
+  else if(a==='tog'||a==='unrule'){const g=el.dataset.g;
+    const flip=(x,y,on)=>{const s=new Set(S.rules[x]||[]);on?s.add(y):s.delete(y);S.rules[x]=[...s];if(!S.rules[x].length)delete S.rules[x]};
+    const on=a==='tog'?!(S.rules[g]||[]).includes(id):false;
+    flip(g,id,on);if(S.mutual)flip(id,g,on);S.links=null}
+  else if(a==='draw'){const r=solve(true);if(!r)return toast('No hay reparto posible');
+    S.links=await Promise.all(S.people.map(async p=>({name:p.name,email:p.email,token:await encrypt({g:p.name,r:nm(r[p.id]),t:S.title,b:S.budget,d:S.date})})))}
+  else if(a==='redo'){if(!confirm('Los enlaces actuales dejarán de ser los vigentes. ¿Continuar?'))return;S.links=null}
+  else if(a==='copy'){try{await navigator.clipboard.writeText(link(+el.dataset.i));toast('Enlace copiado')}catch(x){prompt('Copia el enlace:',link(+el.dataset.i))}return}
+  else if(a==='mail'){const i=+el.dataset.i;location.href=`mailto:${S.links[i].email}?subject=${encodeURIComponent('Tu amigo invisible: '+S.title)}&body=${encodeURIComponent(msg(i))}`;return}
+  else if(a==='wa'){window.open('https://wa.me/?text='+encodeURIComponent(msg(+el.dataset.i)),'_blank');return}
+  save();render();
+});
+window.addEventListener('hashchange',()=>location.reload());
+const h=location.hash;
+if(/^#r[0-9a-f]{80,}$/.test(h))vReveal(h.slice(2));else render();
+</script>
+</body>
+</html>
